@@ -25,14 +25,14 @@ namespace Wox.Plugin.YouTube
 
                 var result = JsonConvert.DeserializeObject<YouTubeSearchResult>(json);
 
-                tempResults.AddRange(from i in result.Items where i.Id.videoId != null select new KeyValuePair<Item, string>(i, ""));
+                tempResults.AddRange(from i in result.Items where i.Id.VideoId != null select new KeyValuePair<Item, string>(i, ""));
             }
 
             return tempResults.Select(result => new Result
             {
                 Title = result.Key.Snippet.Title, SubTitle = result.Key.Snippet.ChannelTitle, IcoPath = "youtube.png", Action = e =>
                 {
-                    Process.Start("https://www.youtube.com/watch?v=" + result.Key.Id.videoId);
+                    Process.Start("https://www.youtube.com/watch?v=" + result.Key.Id.VideoId);
                     return true;
                 }
             }).ToList();
